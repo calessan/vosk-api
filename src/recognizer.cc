@@ -494,6 +494,8 @@ const char *Recognizer::MbrResult(CompactLattice &rlat)
     const vector<int32> &words = mbr.GetOneBest();
     const vector<pair<BaseFloat, BaseFloat> > &times =
           mbr.GetOneBestTimes();
+    const BaseFloat risk = mbr.GetBayesRisk();
+    const BaseFloat vector<vector<pair<int32, BaseFloat> = mbr.GetSausageStats();
 
     int size = words.size();
 
@@ -518,6 +520,7 @@ const char *Recognizer::MbrResult(CompactLattice &rlat)
         text << model_->word_syms_->Find(words[i]);
     }
     obj["text"] = text.str();
+    obj["risk"] = risk
 
     if (spk_model_) {
         Vector<BaseFloat> xvector;
@@ -652,6 +655,8 @@ const char *Recognizer::NbestResult(CompactLattice &clat)
 
       entry["text"] = text.str();
       entry["confidence"]= likelihood;
+      entry["weight1"] = weight.Weight().Value1()
+      entry["weight2"] = weight.Weight().Value2()
       obj["alternatives"].append(entry);
     }
 
@@ -810,6 +815,8 @@ const char* Recognizer::PartialResult()
         const vector<BaseFloat> &conf = mbr.GetOneBestConfidences();
         const vector<int32> &words = mbr.GetOneBest();
         const vector<pair<BaseFloat, BaseFloat> > &times = mbr.GetOneBestTimes();
+        const BaseFloat risk = mbr.GetBayesRisk();
+        const BaseFloat vector<vector<pair<int32, BaseFloat> = mbr.GetSausageStats();
 
         int size = words.size();
 
@@ -831,6 +838,7 @@ const char* Recognizer::PartialResult()
             text << model_->word_syms_->Find(words[i]);
         }
         res["partial"] = text.str();
+        res["risk"] = risk
 
     } else {
 
